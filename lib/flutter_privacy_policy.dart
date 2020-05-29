@@ -9,8 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/rich_text_parser.dart';
 import 'package:flutter_widgets/flutter_widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'models/Message.dart';
@@ -31,6 +31,8 @@ class PrivacyPolicyWidget extends StatelessWidget {
   final String greetingMessages;
   final String policyMessages;
   final VoidCallback allowCallBack;
+  final Color color;
+  final OnLinkTap onLinkTap;
 
   PrivacyPolicyWidget(this.allowCallBack,
       {Key key,
@@ -39,7 +41,9 @@ class PrivacyPolicyWidget extends StatelessWidget {
       this.allowText,
       this.skipText,
       this.greetingMessages,
-      this.policyMessages})
+      this.policyMessages,
+      this.color = Colors.lightBlueAccent,
+      this.onLinkTap})
       : super(key: key);
 
   @override
@@ -56,7 +60,9 @@ class PrivacyPolicyWidget extends StatelessWidget {
           allowText ?? defaultAllowText,
           skipText ?? defaultSkipText,
           greetingMessages,
-          policyMessages),
+          policyMessages,
+          color,
+          onLinkTap),
     );
   }
 }
@@ -69,9 +75,19 @@ class _PrivacyPolicyWidget extends StatefulWidget {
   final String greetingMessages;
   final String policyMessages;
   final VoidCallback allowCallBack;
+  final Color color;
+  final OnLinkTap onLinkTap;
 
-  _PrivacyPolicyWidget(this.allowCallBack, this.friendName, this.continueText,
-      this.allowText, this.skipText, this.greetingMessages, this.policyMessages,
+  _PrivacyPolicyWidget(
+      this.allowCallBack,
+      this.friendName,
+      this.continueText,
+      this.allowText,
+      this.skipText,
+      this.greetingMessages,
+      this.policyMessages,
+      this.color,
+      this.onLinkTap,
       {Key key})
       : super(key: key);
 
@@ -83,11 +99,14 @@ class _PrivacyPolicyWidget extends StatefulWidget {
       allowText ?? defaultAllowText,
       skipText ?? defaultSkipText,
       greetingMessages,
-      policyMessages);
+      policyMessages,
+      color,
+      onLinkTap);
 }
 
 class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
   final VoidCallback allowCallBack;
+  Color color;
   var _friendName;
   var _allowText;
   var _continueText;
@@ -95,11 +114,14 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
   var _greetingMessagesJson = "";
   var _policyMessagesJson = "";
   var _steps = Steps.GREETING;
+  OnLinkTap _onLinkTap;
   List<Message> _policyMessages;
   List<Message> _greetingMessages;
   var currentReadSeconds = 0;
   var totalReadSeconds = 0;
-  ScrollController _scrollController2;
+  ScrollController _scrollController;
+  double scrollProgress = 0.0;
+  bool pausePostPolicy = false;
 
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
@@ -112,13 +134,22 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
       this._allowText,
       this._skipText,
       this._greetingMessagesJson,
-      _policyMessagesJson);
+      this._policyMessagesJson,
+      this.color,
+      this._onLinkTap);
 
   @override
   void initState() {
     super.initState();
-    _scrollController2 = ScrollController();
-    _scrollController2.addListener(() {});
+    _scrollController = ScrollController();
+    _scrollController.addListener(() {
+      if (pausePostPolicy && _scrollController.offset == 0) {
+        pausePostPolicy = false;
+        postPolicyMessages(_policyMessages,
+            Provider.of<MessagesModel>(context, listen: false));
+      }
+    });
+
     loadMessages("en").then((value) {
       postGreetingMessages(_greetingMessages,
           Provider.of<MessagesModel>(context, listen: false));
@@ -138,7 +169,6 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
       String jsonString = await rootBundle.loadString(
           'packages/flutter_privacy_policy/assets/i18n/default_conversation_greeting_$local.json');
       _greetingMessages = fromJsonToMessageList(json.decode(jsonString));
-      ;
     }
     if (_policyMessagesJson != null && _policyMessagesJson.isNotEmpty) {
       List<Message> conversation =
@@ -180,6 +210,11 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
       List<Message> policyMessages, MessagesModel messagesModel) {
     Timer(Duration(seconds: 1), () {
       if (_steps == Steps.POLICY) {
+        if (_scrollController.offset != 0) {
+          pausePostPolicy = true;
+          return;
+        }
+
         if (policyMessages.length > 0) {
           messagesModel.add(policyMessages.first);
           policyMessages.removeAt(0);
@@ -259,9 +294,9 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [
-        Colors.lightBlueAccent.withOpacity(0.3),
-        Colors.lightBlueAccent.withOpacity(0.4),
-        Colors.lightBlueAccent.withOpacity(0.3),
+        color.withOpacity(0.3),
+        color.withOpacity(0.4),
+        color.withOpacity(0.3),
       ],
     );
 
@@ -269,7 +304,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
       return Expanded(
         flex: 7,
         child: RaisedButton(
-          color: Colors.lightBlueAccent,
+          color: color,
           shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(16.0),
           ),
@@ -288,7 +323,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
       Padding(
         padding: EdgeInsets.only(right: 16),
         child: Card(
-            color: Colors.lightBlueAccent,
+            color: color,
             margin: EdgeInsets.zero,
             clipBehavior: Clip.antiAlias,
             shape:
@@ -296,16 +331,19 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
             child: Container(
               height: 48,
               width: 48,
-              child: FlatButton(
-                onPressed: () => {},
-                child: Transform.rotate(
-                  angle: -45 * pi / 180,
-                  child: Transform.translate(
-                    offset: Offset(-3.5, 0.9),
-                    child: Icon(
-                      Icons.send,
-                      size: 28,
-                      color: Colors.white,
+              child: InkWell(
+                onTap: () => {},
+                child: Ink(
+                  color: color,
+                  child: Transform.rotate(
+                    angle: -45 * pi / 180,
+                    child: Transform.translate(
+                      offset: const Offset(4, 0),
+                      child: Icon(
+                        Icons.send,
+                        size: 28,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -383,10 +421,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
             gradient: RadialGradient(
                 focal: Alignment.center,
                 radius: 2,
-                colors: [
-              Colors.lightBlueAccent.withOpacity(0.4),
-              Colors.transparent
-            ])),
+                colors: [color.withOpacity(0.4), Colors.transparent])),
         child: Column(
           children: [
             Row(
@@ -429,9 +464,10 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                                 Consumer<ItemsVisibleModel>(builder:
                                     (context, scrollNotificationModel, child) {
                                   if (messagesModel.items.isNotEmpty) {
-                                    print(scrollNotificationModel
-                                        .visibleItemIndex);
-                                    var newIndex = messagesModel.items.length -1  -
+//                                    print(scrollNotificationModel
+//                                        .visibleItemIndex);
+                                    var newIndex = messagesModel.items.length -
+                                        1 -
                                         scrollNotificationModel
                                             .visibleItemIndex;
 
@@ -439,12 +475,9 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                                     _policyMessages.forEach((element) {
                                       seconds += element.readTimeSeconds;
                                     });
-                                    var list =
-                                        messagesModel.items;
+                                    var list = messagesModel.items;
                                     list
-                                        .sublist(
-                                        newIndex,
-                                        list.length-1)
+                                        .sublist(newIndex, list.length - 1)
                                         .forEach((element) {
                                       seconds += element.readTimeSeconds;
                                     });
@@ -470,6 +503,30 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                 )
               ],
             ),
+            Visibility(
+              visible:
+                  _steps != Steps.GREETING && _steps != Steps.CHOICE_GREETING,
+              child: Consumer<ItemsVisibleModel>(
+                  builder: (context, scrollNotificationModel, child) {
+                switch (_steps) {
+                  case Steps.POLICY:
+                    scrollProgress = max(scrollProgress,
+                        1 - (currentReadSeconds / totalReadSeconds));
+                    break;
+                  default:
+                    if (_scrollController.position.maxScrollExtent > 0) {
+                      scrollProgress = 1 -
+                          (_scrollController.offset /
+                              _scrollController.position.maxScrollExtent);
+                    }
+                    break;
+                }
+
+                return LinearProgressIndicator(
+                  value: scrollProgress,
+                );
+              }),
+            ),
             Expanded(
                 flex: 4,
                 child: Consumer<MessagesModel>(
@@ -480,10 +537,13 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
 //                            .setScrollNotification(scrollNotification);
                         return false;
                       },
-                      child: ListView.builder(
-                          reverse: true,
-                          padding: const EdgeInsets.only(left: 16, right: 16),
-                          itemCount: messageModel.items.length,
+                      child: Scrollbar(
+                        controller: _scrollController,
+                        isAlwaysShown: true,
+                        child: ListView.builder(
+                            reverse: true,
+                            padding: const EdgeInsets.only(left: 16, right: 16),
+                            itemCount: messageModel.items.length,
 //                        itemScrollController: _scrollController,
 //                        itemPositionsListener: itemPositionsListener,
 //                        initialScrollIndex: messageModel.initialScrollPosition,
@@ -491,77 +551,74 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
 //                        messageModel.initialScrollPosition == 0
 //                            ? 0
 //                            : -50,
-                          controller: _scrollController2,
-                        physics: BouncingScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            if (index >= messageModel.items.length) return null;
-                            var message = messageModel.items[index];
+                            controller: _scrollController,
+                            physics: BouncingScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              if (index >= messageModel.items.length)
+                                return null;
+                              var message = messageModel.items[index];
 
-                            var children = [
-                              Flexible(
-                                child: Card(
-                                  clipBehavior: Clip.antiAlias,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                        gradient: RadialGradient(
-                                            focal: Alignment.center,
-                                            radius: 0.6,
-                                            colors: message.isStart()
-                                                ? [
-                                                    Colors.lightBlueAccent
-                                                        .withOpacity(0.7),
-                                                    Colors.lightBlueAccent
-                                                        .withOpacity(0.6)
-                                                  ]
-                                                : [
-                                                    Colors.lightBlueAccent
-                                                        .withOpacity(0.9),
-                                                    Colors.lightBlueAccent
-                                                  ])),
-                                    padding:
-                                        EdgeInsets.only(left: 16, right: 16),
-                                    child: Html(
-                                      shrinkToFit: true,
-                                      data: message.text,
-                                      onLinkTap: (url) {
-                                        print(url);
-                                      },
-                                      defaultTextStyle: TextStyle(
-                                          color: Colors.white, fontSize: 16),
+                              var children = [
+                                Flexible(
+                                  child: Card(
+                                    clipBehavior: Clip.antiAlias,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          gradient: RadialGradient(
+                                              focal: Alignment.center,
+                                              radius: 0.6,
+                                              colors: message.isStart()
+                                                  ? [
+                                                      color.withOpacity(0.7),
+                                                      color.withOpacity(0.6)
+                                                    ]
+                                                  : [
+                                                      color.withOpacity(0.9),
+                                                      color
+                                                    ])),
+                                      padding:
+                                          EdgeInsets.only(left: 16, right: 16),
+                                      child: Html(
+                                        shrinkToFit: true,
+                                        data: message.text,
+                                        onLinkTap: _onLinkTap ?? (url) {},
+                                        defaultTextStyle: TextStyle(
+                                            color: Colors.white, fontSize: 16),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: message.isStart()
-                                    ? EdgeInsets.only(bottom: 8, right: 56)
-                                    : EdgeInsets.only(bottom: 8, left: 56),
-                                child: Text(
-                                  message.getHourMinute(),
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              )
-                            ];
-                            if (message.isEnd()) {
-                              children = children.reversed.toList();
-                            }
-                            return VisibilityDetector(
-                                key: Key("$index"),
-                                onVisibilityChanged: (VisibilityInfo info) {
-                                  if (info.visibleFraction > 0.5)
-                                    itemsVisibleModel.setVisibleItem(index);
-                                },
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  mainAxisAlignment: message.isStart()
-                                      ? MainAxisAlignment.start
-                                      : MainAxisAlignment.end,
-                                  children: children,
-                                ));
-                          }),
+                                Padding(
+                                  padding: message.isStart()
+                                      ? EdgeInsets.only(bottom: 8, right: 56)
+                                      : EdgeInsets.only(bottom: 8, left: 56),
+                                  child: Text(
+                                    message.getHourMinute(),
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                )
+                              ];
+                              if (message.isEnd()) {
+                                children = children.reversed.toList();
+                              }
+                              return VisibilityDetector(
+                                  key: Key("$index"),
+                                  onVisibilityChanged: (VisibilityInfo info) {
+                                    if (info.visibleFraction > 0.5)
+                                      itemsVisibleModel.setVisibleItem(index);
+                                  },
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment: message.isStart()
+                                        ? MainAxisAlignment.start
+                                        : MainAxisAlignment.end,
+                                    children: children,
+                                  ));
+                            }),
+                      ),
                     );
                   },
                 )),
@@ -650,14 +707,4 @@ class MyScrollBehavior extends ScrollBehavior {
       BuildContext context, Widget child, AxisDirection axisDirection) {
     return child;
   }
-}
-
-class ItemContext {
-  final BuildContext context;
-  final int id;
-
-  ItemContext({this.context, this.id});
-
-  @override
-  bool operator ==(Object other) => other is ItemContext && other.id == id;
 }

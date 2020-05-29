@@ -2,8 +2,8 @@ name: flutter_privacy_policy
 description: A better UX to present your privacy policy
 version: 0.0.1
 author: Ahmed Alnaami
-homepage: https://twitter.com/diegoveloper
-repository: https://github.com/diegoveloper/flutter_percent_indicator/
+#homepage: https://twitter.com/diegoveloper
+repository: https://github.com/ahna92/flutter_privacy_policy
 
 
 environment:
@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_widgets: ^0.1.12
+  json_annotation: ^3.0.1
   json_serializable: ^3.3.0
   intl: ^0.16.1
   flutter_html: ^0.11.1

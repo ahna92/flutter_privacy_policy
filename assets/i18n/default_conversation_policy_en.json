@@ -9,307 +9,54 @@
   },
   {
     "from": "start",
-    "text": "softy-tech built the chat-analyzer app as an Ad Supported app. This SERVICE is provided by softy-tech at no cost and is intended for use as is"
+    "text": "This SERVICE is provided by at no cost and is intended for use as is"
   },
   {
     "from": "start",
-    "text": "For a better experience the app does use third party services that may collect information used to identify you.\nLink to privacy policy of third party service providers used by the app\n<ul><li><a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a></li><li><a href=\"https://support.google.com/admob/answer/6128543?hl=en\" target=\"_blank\">AdMob</a></li><li><a href=\"https://firebase.google.com/policies/analytics\" target=\"_blank\">Google Analytics for Firebase</a></li><li><a href=\"https://firebase.google.com/support/privacy/\" target=\"_blank\">Firebase Crashlytics</a></li></ul>"
+    "text": "This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service."
   },
   {
     "from": "start",
-    "text": "mainley crashes reports,certain events like openning a page or UI, time spent on the app and other event related to app performance"
+    "text": "This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service."
   },
   {
     "from": "end",
-    "text": "Are you going to Know who I'm ??!"
+    "text": "Do you collect data and information ?"
   },
   {
     "from": "start",
-    "text": "No ! , we do not ask our users to login or use emails or provide a phone number\nThis application provide a tool to be used as free service"
+    "text": "For a better experience, while using our Service, I may require you to provide us with certain personally identifiable information."
+  },
+  {
+    "from": "start",
+    "text": "The information that I request will be retained on your device and is not collected by me in any way.\n\nThe app does use third party services that may collect information used to identify you."
+  },
+  {
+    "from": "start",
+    "text": "The information that I request will be retained on your device and is not collected by me in any way.\n\nThe app does use third party services that may collect information used to identify you."
+  },
+  {
+    "from": "start",
+    "text": "Link to privacy policy of third party service providers used by the app\n<ul><li><a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a></li></ul>"
   },
   {
     "from": "end",
-    "text": "Free ?, so how do you make money?"
+    "text": "Do you log data ?"
   },
   {
     "from": "start",
-    "text": "To keep providing this service we show ads"
+    "text": "I want to inform you that whenever you use my Service, in a case of an error in the app I collect data and information (through third party products) on your phone called Log Data. This Log Data may include information such as your device Internet Protocol (“IP”) address, device name, operating system version, the configuration of the app when utilizing my Service, the time and date of your use of the Service, and other statistics."
   },
   {
     "from": "end",
-    "text": "Are this ads going to be"
-  },{
-  "from": "start",
-  "text": "Great lets start !"
-},
-  {
-    "from": "start",
-    "text": "This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information"
+    "text": "show me the full version of this privacy policy"
   },
   {
     "from": "start",
-    "text": "softy-tech built the chat-analyzer app as an Ad Supported app. This SERVICE is provided by softy-tech at no cost and is intended for use as is"
+    "text": "Sure , follow this link :\n <a href=\"https://app-privacy-policy-generator.firebaseapp.com\">https://app-privacy-policy-generator.firebaseapp.com</a>"
   },
   {
     "from": "start",
-    "text": "For a better experience the app does use third party services that may collect information used to identify you.\nLink to privacy policy of third party service providers used by the app\n<ul><li><a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a></li><li><a href=\"https://support.google.com/admob/answer/6128543?hl=en\" target=\"_blank\">AdMob</a></li><li><a href=\"https://firebase.google.com/policies/analytics\" target=\"_blank\">Google Analytics for Firebase</a></li><li><a href=\"https://firebase.google.com/support/privacy/\" target=\"_blank\">Firebase Crashlytics</a></li></ul>"
-  },
-  {
-    "from": "start",
-    "text": "mainley crashes reports,certain events like openning a page or UI, time spent on the app and other event related to app performance"
-  },
-  {
-    "from": "end",
-    "text": "Are you going to Know who I'm ??!"
-  },
-  {
-    "from": "start",
-    "text": "No ! , we do not ask our users to login or use emails or provide a phone number\nThis application provide a tool to be used as free service"
-  },
-  {
-    "from": "end",
-    "text": "Free ?, so how do you make money?"
-  },
-  {
-    "from": "start",
-    "text": "To keep providing this service we show ads"
-  },
-  {
-    "from": "end",
-    "text": "Are this ads going to be"
-  },{
-  "from": "start",
-  "text": "Great lets start !"
-},
-  {
-    "from": "start",
-    "text": "This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information"
-  },
-  {
-    "from": "start",
-    "text": "softy-tech built the chat-analyzer app as an Ad Supported app. This SERVICE is provided by softy-tech at no cost and is intended for use as is"
-  },
-  {
-    "from": "start",
-    "text": "For a better experience the app does use third party services that may collect information used to identify you.\nLink to privacy policy of third party service providers used by the app\n<ul><li><a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a></li><li><a href=\"https://support.google.com/admob/answer/6128543?hl=en\" target=\"_blank\">AdMob</a></li><li><a href=\"https://firebase.google.com/policies/analytics\" target=\"_blank\">Google Analytics for Firebase</a></li><li><a href=\"https://firebase.google.com/support/privacy/\" target=\"_blank\">Firebase Crashlytics</a></li></ul>"
-  },
-  {
-    "from": "start",
-    "text": "mainley crashes reports,certain events like openning a page or UI, time spent on the app and other event related to app performance"
-  },
-  {
-    "from": "end",
-    "text": "Are you going to Know who I'm ??!"
-  },
-  {
-    "from": "start",
-    "text": "No ! , we do not ask our users to login or use emails or provide a phone number\nThis application provide a tool to be used as free service"
-  },
-  {
-    "from": "end",
-    "text": "Free ?, so how do you make money?"
-  },
-  {
-    "from": "start",
-    "text": "To keep providing this service we show ads"
-  },
-  {
-    "from": "end",
-    "text": "Are this ads going to be"
-  },{
-  "from": "start",
-  "text": "Great lets start !"
-},
-  {
-    "from": "start",
-    "text": "This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information"
-  },
-  {
-    "from": "start",
-    "text": "softy-tech built the chat-analyzer app as an Ad Supported app. This SERVICE is provided by softy-tech at no cost and is intended for use as is"
-  },
-  {
-    "from": "start",
-    "text": "For a better experience the app does use third party services that may collect information used to identify you.\nLink to privacy policy of third party service providers used by the app\n<ul><li><a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a></li><li><a href=\"https://support.google.com/admob/answer/6128543?hl=en\" target=\"_blank\">AdMob</a></li><li><a href=\"https://firebase.google.com/policies/analytics\" target=\"_blank\">Google Analytics for Firebase</a></li><li><a href=\"https://firebase.google.com/support/privacy/\" target=\"_blank\">Firebase Crashlytics</a></li></ul>"
-  },
-  {
-    "from": "start",
-    "text": "mainley crashes reports,certain events like openning a page or UI, time spent on the app and other event related to app performance"
-  },
-  {
-    "from": "end",
-    "text": "Are you going to Know who I'm ??!"
-  },
-  {
-    "from": "start",
-    "text": "No ! , we do not ask our users to login or use emails or provide a phone number\nThis application provide a tool to be used as free service"
-  },
-  {
-    "from": "end",
-    "text": "Free ?, so how do you make money?"
-  },
-  {
-    "from": "start",
-    "text": "To keep providing this service we show ads"
-  },
-  {
-    "from": "end",
-    "text": "Are this ads going to be"
-  },{
-  "from": "start",
-  "text": "Great lets start !"
-},
-  {
-    "from": "start",
-    "text": "This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information"
-  },
-  {
-    "from": "start",
-    "text": "softy-tech built the chat-analyzer app as an Ad Supported app. This SERVICE is provided by softy-tech at no cost and is intended for use as is"
-  },
-  {
-    "from": "start",
-    "text": "For a better experience the app does use third party services that may collect information used to identify you.\nLink to privacy policy of third party service providers used by the app\n<ul><li><a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a></li><li><a href=\"https://support.google.com/admob/answer/6128543?hl=en\" target=\"_blank\">AdMob</a></li><li><a href=\"https://firebase.google.com/policies/analytics\" target=\"_blank\">Google Analytics for Firebase</a></li><li><a href=\"https://firebase.google.com/support/privacy/\" target=\"_blank\">Firebase Crashlytics</a></li></ul>"
-  },
-  {
-    "from": "start",
-    "text": "mainley crashes reports,certain events like openning a page or UI, time spent on the app and other event related to app performance"
-  },
-  {
-    "from": "end",
-    "text": "Are you going to Know who I'm ??!"
-  },
-  {
-    "from": "start",
-    "text": "No ! , we do not ask our users to login or use emails or provide a phone number\nThis application provide a tool to be used as free service"
-  },
-  {
-    "from": "end",
-    "text": "Free ?, so how do you make money?"
-  },
-  {
-    "from": "start",
-    "text": "To keep providing this service we show ads"
-  },
-  {
-    "from": "end",
-    "text": "Are this ads going to be"
-  },{
-  "from": "start",
-  "text": "Great lets start !"
-},
-  {
-    "from": "start",
-    "text": "This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information"
-  },
-  {
-    "from": "start",
-    "text": "softy-tech built the chat-analyzer app as an Ad Supported app. This SERVICE is provided by softy-tech at no cost and is intended for use as is"
-  },
-  {
-    "from": "start",
-    "text": "For a better experience the app does use third party services that may collect information used to identify you.\nLink to privacy policy of third party service providers used by the app\n<ul><li><a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a></li><li><a href=\"https://support.google.com/admob/answer/6128543?hl=en\" target=\"_blank\">AdMob</a></li><li><a href=\"https://firebase.google.com/policies/analytics\" target=\"_blank\">Google Analytics for Firebase</a></li><li><a href=\"https://firebase.google.com/support/privacy/\" target=\"_blank\">Firebase Crashlytics</a></li></ul>"
-  },
-  {
-    "from": "start",
-    "text": "mainley crashes reports,certain events like openning a page or UI, time spent on the app and other event related to app performance"
-  },
-  {
-    "from": "end",
-    "text": "Are you going to Know who I'm ??!"
-  },
-  {
-    "from": "start",
-    "text": "No ! , we do not ask our users to login or use emails or provide a phone number\nThis application provide a tool to be used as free service"
-  },
-  {
-    "from": "end",
-    "text": "Free ?, so how do you make money?"
-  },
-  {
-    "from": "start",
-    "text": "To keep providing this service we show ads"
-  },
-  {
-    "from": "end",
-    "text": "Are this ads going to be"
-  },{
-  "from": "start",
-  "text": "Great lets start !"
-},
-  {
-    "from": "start",
-    "text": "This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information"
-  },
-  {
-    "from": "start",
-    "text": "softy-tech built the chat-analyzer app as an Ad Supported app. This SERVICE is provided by softy-tech at no cost and is intended for use as is"
-  },
-  {
-    "from": "start",
-    "text": "For a better experience the app does use third party services that may collect information used to identify you.\nLink to privacy policy of third party service providers used by the app\n<ul><li><a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a></li><li><a href=\"https://support.google.com/admob/answer/6128543?hl=en\" target=\"_blank\">AdMob</a></li><li><a href=\"https://firebase.google.com/policies/analytics\" target=\"_blank\">Google Analytics for Firebase</a></li><li><a href=\"https://firebase.google.com/support/privacy/\" target=\"_blank\">Firebase Crashlytics</a></li></ul>"
-  },
-  {
-    "from": "start",
-    "text": "mainley crashes reports,certain events like openning a page or UI, time spent on the app and other event related to app performance"
-  },
-  {
-    "from": "end",
-    "text": "Are you going to Know who I'm ??!"
-  },
-  {
-    "from": "start",
-    "text": "No ! , we do not ask our users to login or use emails or provide a phone number\nThis application provide a tool to be used as free service"
-  },
-  {
-    "from": "end",
-    "text": "Free ?, so how do you make money?"
-  },
-  {
-    "from": "start",
-    "text": "To keep providing this service we show ads"
-  },
-  {
-    "from": "end",
-    "text": "Are this ads going to be"
-  },{
-  "from": "start",
-  "text": "Great lets start !"
-},
-  {
-    "from": "start",
-    "text": "This page is used to inform visitors regarding our policies with the collection, use, and disclosure of Personal Information"
-  },
-  {
-    "from": "start",
-    "text": "softy-tech built the chat-analyzer app as an Ad Supported app. This SERVICE is provided by softy-tech at no cost and is intended for use as is"
-  },
-  {
-    "from": "start",
-    "text": "For a better experience the app does use third party services that may collect information used to identify you.\nLink to privacy policy of third party service providers used by the app\n<ul><li><a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a></li><li><a href=\"https://support.google.com/admob/answer/6128543?hl=en\" target=\"_blank\">AdMob</a></li><li><a href=\"https://firebase.google.com/policies/analytics\" target=\"_blank\">Google Analytics for Firebase</a></li><li><a href=\"https://firebase.google.com/support/privacy/\" target=\"_blank\">Firebase Crashlytics</a></li></ul>"
-  },
-  {
-    "from": "start",
-    "text": "mainley crashes reports,certain events like openning a page or UI, time spent on the app and other event related to app performance"
-  },
-  {
-    "from": "end",
-    "text": "Are you going to Know who I'm ??!"
-  },
-  {
-    "from": "start",
-    "text": "No ! , we do not ask our users to login or use emails or provide a phone number\nThis application provide a tool to be used as free service"
-  },
-  {
-    "from": "end",
-    "text": "Free ?, so how do you make money?"
-  },
-  {
-    "from": "start",
-    "text": "To keep providing this service we show ads"
-  },
-  {
-    "from": "end",
-    "text": "Are this ads going to be"
+    "text": "if you approve this privacy policy Click \"Allow\" to continue to app "
   }
 ]

@@ -1,3 +1,9 @@
-## [0.0.1] - TODO: Add release date.
-
-* TODO: Describe initial release.
+## 0.0.1
+* Initial release.
+* add Greeting messages.
+* add Policy messages.
+* Time spent reading.
+* Support html in messages.
+  
+  
+  
