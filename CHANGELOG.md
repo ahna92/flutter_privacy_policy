@@ -1,3 +1,7 @@
+## 0.0.3
+* fix background
+* fix message text size
+
 ## 0.0.2
 * update provider
 

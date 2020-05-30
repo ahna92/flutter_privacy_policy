@@ -416,7 +416,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
         chatBoxChildren.insert(1, Spacer());
     }
 
-    return Container(
+    return Container(color: Colors.white,child: Container(
         decoration: BoxDecoration(
             gradient: RadialGradient(
                 focal: Alignment.center,
@@ -505,27 +505,27 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
             ),
             Visibility(
               visible:
-                  _steps != Steps.GREETING && _steps != Steps.CHOICE_GREETING,
+              _steps != Steps.GREETING && _steps != Steps.CHOICE_GREETING,
               child: Consumer<ItemsVisibleModel>(
                   builder: (context, scrollNotificationModel, child) {
-                switch (_steps) {
-                  case Steps.POLICY:
-                    scrollProgress = max(scrollProgress,
-                        1 - (currentReadSeconds / totalReadSeconds));
-                    break;
-                  default:
-                    if (_scrollController.position.maxScrollExtent > 0) {
-                      scrollProgress = 1 -
-                          (_scrollController.offset /
-                              _scrollController.position.maxScrollExtent);
+                    switch (_steps) {
+                      case Steps.POLICY:
+                        scrollProgress = max(scrollProgress,
+                            1 - (currentReadSeconds / totalReadSeconds));
+                        break;
+                      default:
+                        if (_scrollController.position.maxScrollExtent > 0) {
+                          scrollProgress = 1 -
+                              (_scrollController.offset /
+                                  _scrollController.position.maxScrollExtent);
+                        }
+                        break;
                     }
-                    break;
-                }
 
-                return LinearProgressIndicator(
-                  value: scrollProgress,
-                );
-              }),
+                    return LinearProgressIndicator(
+                      value: scrollProgress,
+                    );
+                  }),
             ),
             Expanded(
                 flex: 4,
@@ -572,15 +572,15 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                                               radius: 0.6,
                                               colors: message.isStart()
                                                   ? [
-                                                      color.withOpacity(0.7),
-                                                      color.withOpacity(0.6)
-                                                    ]
+                                                color.withOpacity(0.7),
+                                                color.withOpacity(0.6)
+                                              ]
                                                   : [
-                                                      color.withOpacity(0.9),
-                                                      color
-                                                    ])),
+                                                color.withOpacity(0.9),
+                                                color
+                                              ])),
                                       padding:
-                                          EdgeInsets.only(left: 16, right: 16),
+                                      EdgeInsets.only(left: 16, right: 16),
                                       child: Html(
                                         shrinkToFit: true,
                                         data: message.text,
@@ -597,7 +597,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                                       : EdgeInsets.only(bottom: 8, left: 56),
                                   child: Text(
                                     message.getHourMinute(),
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: Colors.white,fontSize: 14),
                                   ),
                                 )
                               ];
@@ -626,7 +626,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                 flex: 1,
                 child: Padding(
                   padding:
-                      const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+                  const EdgeInsets.only(left: 16, right: 16, bottom: 16),
                   child: Card(
                       margin: EdgeInsets.zero,
                       clipBehavior: Clip.antiAlias,
@@ -644,7 +644,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                           ))),
                 )),
           ],
-        ));
+        )),);
   }
 }
 
