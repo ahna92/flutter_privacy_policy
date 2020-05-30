@@ -300,9 +300,9 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
       ],
     );
 
-    Widget getChatBoxText(String text, VoidCallback onPressed) {
+    Widget getChatOptionBox(String text, VoidCallback onPressed) {
       return Expanded(
-        flex: 7,
+        flex: 8,
         child: RaisedButton(
           color: color,
           shape: RoundedRectangleBorder(
@@ -313,7 +313,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
             text,
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Colors.white, fontSize: 18, fontFamily: "Roboto"),
+                color: Colors.white, fontSize: 17),
           ),
         ),
       );
@@ -360,14 +360,14 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
               flex: 1,
             ));
         chatBoxChildren.insert(
-            1, getChatBoxText(_continueText, () => {handleContinue()}));
+            1, getChatOptionBox(_continueText, () => {handleContinue()}));
         chatBoxChildren.insert(
             2,
             Spacer(
               flex: 1,
             ));
         chatBoxChildren.insert(
-            3, getChatBoxText(_allowText, () => {handleAllow()}));
+            3, getChatOptionBox(_allowText, () => {handleAllow()}));
         chatBoxChildren.insert(
           4,
           Spacer(
@@ -382,7 +382,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
               flex: 1,
             ));
         chatBoxChildren.insert(
-            1, getChatBoxText(_skipText, () => {handleSkip()}));
+            1, getChatOptionBox(_skipText, () => {handleSkip()}));
         chatBoxChildren.insert(
           2,
           Spacer(
@@ -397,7 +397,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
               flex: 1,
             ));
         chatBoxChildren.insert(
-            1, getChatBoxText(_allowText, () => {handleAllow()}));
+            1, getChatOptionBox(_allowText, () => {handleAllow()}));
         chatBoxChildren.insert(
           2,
           Spacer(
@@ -411,12 +411,12 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
             Text(
               "Write Message",
               style: TextStyle(
-                  color: Colors.white, fontSize: 16, fontFamily: "Roboto"),
+                  color: Colors.white, fontSize: 16),
             ));
         chatBoxChildren.insert(1, Spacer());
     }
 
-    return Container(color: Colors.white,child: Container(
+    return Material(color: Colors.white,child: Container(
         decoration: BoxDecoration(
             gradient: RadialGradient(
                 focal: Alignment.center,
@@ -455,8 +455,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
-                                      fontSize: 20,
-                                      fontFamily: "Roboto"),
+                                      fontSize: 18),
                                 ),
                               ),
                               Spacer(),
@@ -528,7 +527,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                   }),
             ),
             Expanded(
-                flex: 4,
+                flex: 5,
                 child: Consumer<MessagesModel>(
                   builder: (context, messageModel, child) {
                     return NotificationListener<ScrollNotification>(
@@ -593,11 +592,11 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                                 ),
                                 Padding(
                                   padding: message.isStart()
-                                      ? EdgeInsets.only(bottom: 8, right: 56)
-                                      : EdgeInsets.only(bottom: 8, left: 56),
+                                      ? EdgeInsets.only(bottom: 8, right: 48)
+                                      : EdgeInsets.only(bottom: 8, left: 48),
                                   child: Text(
                                     message.getHourMinute(),
-                                    style: TextStyle(color: Colors.white,fontSize: 14),
+                                    style: TextStyle(color: Colors.white,fontSize: 13),
                                   ),
                                 )
                               ];

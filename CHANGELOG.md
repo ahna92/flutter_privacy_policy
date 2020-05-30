@@ -1,3 +1,7 @@
+## 0.0.4
+* fix chat box size
+* fix chat option text size
+
 ## 0.0.3
 * fix background
 * fix message text size
