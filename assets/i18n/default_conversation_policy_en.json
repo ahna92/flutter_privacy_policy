@@ -16,10 +16,6 @@
     "text": "This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service."
   },
   {
-    "from": "start",
-    "text": "This page is used to inform visitors regarding my policies with the collection, use, and disclosure of Personal Information if anyone decided to use my Service."
-  },
-  {
     "from": "end",
     "text": "Do you collect data and information ?"
   },
@@ -29,15 +25,11 @@
   },
   {
     "from": "start",
-    "text": "The information that I request will be retained on your device and is not collected by me in any way.\n\nThe app does use third party services that may collect information used to identify you."
+    "text": "The information that I request will be retained on your device and is not collected by me in any way.<br>The app does use third party services that may collect information used to identify you."
   },
   {
     "from": "start",
-    "text": "The information that I request will be retained on your device and is not collected by me in any way.\n\nThe app does use third party services that may collect information used to identify you."
-  },
-  {
-    "from": "start",
-    "text": "Link to privacy policy of third party service providers used by the app\n<ul><li><a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a></li></ul>"
+    "text": "Link to privacy policy of third party service providers used by the app <br><br> • <a href=\"https://www.google.com/policies/privacy/\" target=\"_blank\">Google Play Services</a>"
   },
   {
     "from": "end",
@@ -53,7 +45,7 @@
   },
   {
     "from": "start",
-    "text": "Sure , follow this link :\n <a href=\"https://app-privacy-policy-generator.firebaseapp.com\">https://app-privacy-policy-generator.firebaseapp.com</a>"
+    "text": "Sure , follow this link :<br> <a href=\"https://app-privacy-policy-generator.firebaseapp.com\">https://app-privacy-policy-generator.firebaseapp.com</a>"
   },
   {
     "from": "start",

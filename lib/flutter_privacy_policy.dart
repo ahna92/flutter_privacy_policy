@@ -208,7 +208,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
 
   void postPolicyMessages(
       List<Message> policyMessages, MessagesModel messagesModel) {
-    Timer(Duration(seconds: 1), () {
+    Timer(Duration(seconds: messagesModel.items.first?.readTimeSeconds??1), () {
       if (_steps == Steps.POLICY) {
         if (_scrollController.offset != 0) {
           pausePostPolicy = true;
@@ -302,7 +302,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
 
     Widget getChatOptionBox(String text, VoidCallback onPressed) {
       return Expanded(
-        flex: 8,
+        flex: 10,
         child: RaisedButton(
           color: color,
           shape: RoundedRectangleBorder(
@@ -313,7 +313,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
             text,
             textAlign: TextAlign.center,
             style: TextStyle(
-                color: Colors.white, fontSize: 17),
+                color: Colors.white, fontSize: 16),
           ),
         ),
       );
@@ -453,7 +453,6 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                                 child: Text(
                                   _friendName,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                       fontSize: 18),
                                 ),
@@ -527,7 +526,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                   }),
             ),
             Expanded(
-                flex: 5,
+                flex: 6,
                 child: Consumer<MessagesModel>(
                   builder: (context, messageModel, child) {
                     return NotificationListener<ScrollNotification>(

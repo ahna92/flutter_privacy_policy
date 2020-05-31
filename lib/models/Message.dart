@@ -16,7 +16,7 @@ class Message {
   Message(this.from, this.text, {this.time, this.readTimeSeconds}) {
     this.time = DateTime.now().millisecondsSinceEpoch;
     if (this.readTimeSeconds == null) this.readTimeSeconds = getTotalReadTime();
-    this.text = "<p>${this.text}</p>";
+    this.text = "<p style='text-align: justify;'>${this.text}</p>";
   }
 
   factory Message.fromJson(Map<String, dynamic> json) =>
