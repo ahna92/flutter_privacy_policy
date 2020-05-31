@@ -1,3 +1,8 @@
+## 0.0.5
+* use br in html
+* align message text
+* use read seconds while posting policy messages
+
 ## 0.0.4
 * fix chat box size
 * fix chat option text size
