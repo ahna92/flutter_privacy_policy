@@ -8,10 +8,10 @@ const MESSAGE_END = "end";
 
 @JsonSerializable(nullable: false)
 class Message {
-  final String from;
-  String text;
-  int time;
-  int readTimeSeconds = 0;
+  final String? from;
+  String? text;
+  int? time;
+  int? readTimeSeconds = 0;
 
   Message(this.from, this.text, {this.time, this.readTimeSeconds}) {
     this.time = DateTime.now().millisecondsSinceEpoch;
@@ -33,7 +33,7 @@ class Message {
   }
 
   int getTotalReadTime() {
-    var wordCount = this.text.split(" ").length;
+    var wordCount = this.text!.split(" ").length;
     var minAndSec = (wordCount / 200.0).toStringAsFixed(2);
     var minutes = int.parse(minAndSec.split(".")[0]);
     var seconds =
@@ -51,7 +51,7 @@ class Message {
 
   String getHourMinute() {
     return DateFormat.Hm()
-        .format(DateTime.fromMicrosecondsSinceEpoch(time).toLocal());
+        .format(DateTime.fromMicrosecondsSinceEpoch(time!).toLocal());
   }
 }
 

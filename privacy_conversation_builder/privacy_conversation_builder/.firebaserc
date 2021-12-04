@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "chat-analyzer-271805": {
+      "hosting": {
+        "generate-privacy": [
+          "generate-privacy-dashboard"
+        ],
+        "target-name": [
+          "resource-name"
+        ]
+      }
+    }
+  }
+}

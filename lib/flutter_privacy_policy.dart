@@ -9,8 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_html/rich_text_parser.dart';
-import 'package:flutter_widgets/flutter_widgets.dart';
+import 'package:visibility_detector/visibility_detector.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:provider/provider.dart';
 
 import 'models/Message.dart';
@@ -24,18 +24,18 @@ const String defaultSkipText = "Skip";
 enum Steps { GREETING, CHOICE_GREETING, POLICY, CHOICE_POLICY }
 
 class PrivacyPolicyWidget extends StatelessWidget {
-  final String friendName;
-  final String allowText;
-  final String continueText;
-  final String skipText;
-  final String greetingMessages;
-  final String policyMessages;
+  final String? friendName;
+  final String? allowText;
+  final String? continueText;
+  final String? skipText;
+  final String? greetingMessages;
+  final String? policyMessages;
   final VoidCallback allowCallBack;
   final Color color;
-  final OnLinkTap onLinkTap;
+  final OnTap? onLinkTap;
 
   PrivacyPolicyWidget(this.allowCallBack,
-      {Key key,
+      {Key? key,
       this.friendName,
       this.continueText,
       this.allowText,
@@ -43,7 +43,9 @@ class PrivacyPolicyWidget extends StatelessWidget {
       this.greetingMessages,
       this.policyMessages,
       this.color = Colors.lightBlueAccent,
-      this.onLinkTap})
+      this.onLinkTap
+      }
+      )
       : super(key: key);
 
   @override
@@ -72,11 +74,11 @@ class _PrivacyPolicyWidget extends StatefulWidget {
   final String allowText;
   final String continueText;
   final String skipText;
-  final String greetingMessages;
-  final String policyMessages;
+  final String? greetingMessages;
+  final String? policyMessages;
   final VoidCallback allowCallBack;
   final Color color;
-  final OnLinkTap onLinkTap;
+  final OnTap? onLinkTap;
 
   _PrivacyPolicyWidget(
       this.allowCallBack,
@@ -88,7 +90,7 @@ class _PrivacyPolicyWidget extends StatefulWidget {
       this.policyMessages,
       this.color,
       this.onLinkTap,
-      {Key key})
+      {Key? key})
       : super(key: key);
 
   @override
@@ -111,15 +113,15 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
   var _allowText;
   var _continueText;
   var _skipText;
-  var _greetingMessagesJson = "";
-  var _policyMessagesJson = "";
+  String? _greetingMessagesJson = "";
+  String? _policyMessagesJson = "";
   var _steps = Steps.GREETING;
-  OnLinkTap _onLinkTap;
-  List<Message> _policyMessages;
-  List<Message> _greetingMessages;
+  OnTap? _onLinkTap;
+  List<Message>? _policyMessages;
+  List<Message>? _greetingMessages;
   var currentReadSeconds = 0;
   var totalReadSeconds = 0;
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
   double scrollProgress = 0.0;
   bool pausePostPolicy = false;
 
@@ -142,8 +144,8 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
   void initState() {
     super.initState();
     _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      if (pausePostPolicy && _scrollController.offset == 0) {
+    _scrollController!.addListener(() {
+      if (pausePostPolicy && _scrollController!.offset == 0) {
         pausePostPolicy = false;
         postPolicyMessages(_policyMessages,
             Provider.of<MessagesModel>(context, listen: false));
@@ -162,17 +164,17 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
   }
 
   Future<void> loadMessages(String local) async {
-    if (_greetingMessagesJson != null && _greetingMessagesJson.isNotEmpty) {
+    if (_greetingMessagesJson != null && _greetingMessagesJson!.isNotEmpty) {
       _greetingMessages =
-          fromJsonToMessageList(json.decode(_greetingMessagesJson));
+          fromJsonToMessageList(json.decode(_greetingMessagesJson!));
     } else {
       String jsonString = await rootBundle.loadString(
           'packages/flutter_privacy_policy/assets/i18n/default_conversation_greeting_$local.json');
       _greetingMessages = fromJsonToMessageList(json.decode(jsonString));
     }
-    if (_policyMessagesJson != null && _policyMessagesJson.isNotEmpty) {
+    if (_policyMessagesJson != null && _policyMessagesJson!.isNotEmpty) {
       List<Message> conversation =
-          fromJsonToMessageList(json.decode(_policyMessagesJson));
+          fromJsonToMessageList(json.decode(_policyMessagesJson!));
       _policyMessages = conversation;
     } else {
       String jsonString = await rootBundle.loadString(
@@ -180,19 +182,19 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
       _policyMessages = fromJsonToMessageList(json.decode(jsonString));
     }
 
-    _greetingMessages.forEach((element) {
-      totalReadSeconds += element.readTimeSeconds;
+    _greetingMessages!.forEach((element) {
+      totalReadSeconds += element.readTimeSeconds!;
     });
-    _policyMessages.forEach((element) {
-      totalReadSeconds += element.readTimeSeconds;
+    _policyMessages!.forEach((element) {
+      totalReadSeconds += element.readTimeSeconds!;
     });
     currentReadSeconds = totalReadSeconds;
   }
 
   void postGreetingMessages(
-      List<Message> greetingMessages, MessagesModel messagesModel) {
+      List<Message>? greetingMessages, MessagesModel messagesModel) {
     Timer(Duration(seconds: 1), () {
-      if (greetingMessages.length > 0) {
+      if (greetingMessages!.length > 0) {
         messagesModel.add(greetingMessages.first);
         greetingMessages.removeAt(0);
         if (greetingMessages.length > 0) {
@@ -207,15 +209,15 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
   }
 
   void postPolicyMessages(
-      List<Message> policyMessages, MessagesModel messagesModel) {
+      List<Message>? policyMessages, MessagesModel messagesModel) {
     Timer(Duration(seconds: messagesModel.items.first?.readTimeSeconds??1), () {
       if (_steps == Steps.POLICY) {
-        if (_scrollController.offset != 0) {
+        if (_scrollController!.offset != 0) {
           pausePostPolicy = true;
           return;
         }
 
-        if (policyMessages.length > 0) {
+        if (policyMessages!.length > 0) {
           messagesModel.add(policyMessages.first);
           policyMessages.removeAt(0);
           postPolicyMessages(policyMessages, messagesModel);
@@ -283,9 +285,9 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
     void handleSkip() {
       setState(() {
         _steps = Steps.CHOICE_POLICY;
-        if (_policyMessages != null && _policyMessages.isNotEmpty) {
-          messagesModel.addAll(_policyMessages);
-          _policyMessages.clear();
+        if (_policyMessages != null && _policyMessages!.isNotEmpty) {
+          messagesModel.addAll(_policyMessages!);
+          _policyMessages!.clear();
         }
       });
     }
@@ -470,14 +472,14 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                                             .visibleItemIndex;
 
                                     var seconds = 0;
-                                    _policyMessages.forEach((element) {
-                                      seconds += element.readTimeSeconds;
+                                    _policyMessages!.forEach((element) {
+                                      seconds += element.readTimeSeconds!;
                                     });
                                     var list = messagesModel.items;
                                     list
                                         .sublist(newIndex, list.length - 1)
                                         .forEach((element) {
-                                      seconds += element.readTimeSeconds;
+                                      seconds += element.readTimeSeconds!;
                                     });
                                     currentReadSeconds = seconds;
                                   }
@@ -512,10 +514,10 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                             1 - (currentReadSeconds / totalReadSeconds));
                         break;
                       default:
-                        if (_scrollController.position.maxScrollExtent > 0) {
+                        if (_scrollController!.position.maxScrollExtent > 0) {
                           scrollProgress = 1 -
-                              (_scrollController.offset /
-                                  _scrollController.position.maxScrollExtent);
+                              (_scrollController!.offset /
+                                  _scrollController!.position.maxScrollExtent);
                         }
                         break;
                     }
@@ -553,7 +555,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                             physics: BouncingScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
                               if (index >= messageModel.items.length)
-                                return null;
+                                return Container();
                               var message = messageModel.items[index];
 
                               var children = [
@@ -580,11 +582,11 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
                                       padding:
                                       EdgeInsets.only(left: 16, right: 16),
                                       child: Html(
-                                        shrinkToFit: true,
+                                        // shrinkToFit: true,
                                         data: message.text,
-                                        onLinkTap: _onLinkTap ?? (url) {},
-                                        defaultTextStyle: TextStyle(
-                                            color: Colors.white, fontSize: 16),
+                                        onLinkTap: _onLinkTap,
+                                        // defaultTextStyle: TextStyle(
+                                        //     color: Colors.white, fontSize: 16),
                                       ),
                                     ),
                                   ),
@@ -647,7 +649,7 @@ class _PrivacyPolicyWidgetState extends State<_PrivacyPolicyWidget> {
 }
 
 class ItemsVisibleModel with ChangeNotifier {
-  ScrollNotification scrollNotification;
+  ScrollNotification? scrollNotification;
   var visibleItemIndex = 0;
 
   setVisibleItem(int index) {

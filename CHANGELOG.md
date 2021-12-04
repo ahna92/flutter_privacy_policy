@@ -1,3 +1,6 @@
+## 0.0.6
+* support null safety
+
 ## 0.0.5
 * use br in html
 * align message text

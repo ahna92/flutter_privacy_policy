@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -54,7 +54,7 @@ class MyHomePage extends StatefulWidget {
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
 
-  final String title;
+  final String? title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -112,7 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   downloadFile(
                       "greetingMessages_${DateTime.now().toLocal()}.json",
                       json.encode(model.greetingList.reversed
-                          .map((e) => CompactMessage(e.from, e.text))
+                          .map((e) => CompactMessage(e.from ?? "", e.text ?? ""))
                           .toList()));
                 }
 
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   downloadFile(
                       "policyMessages_${DateTime.now().toLocal()}.json",
                       json.encode(model.policyList.reversed
-                          .map((e) => CompactMessage(e.from, e.text))
+                          .map((e) => CompactMessage(e.from ?? "", e.text ?? ""))
                           .toList()));
               },
             ),
@@ -159,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
         appBar: AppBar(
           // Here we take the value from the MyHomePage object that was created by
           // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
+          title: Text(widget.title ?? ""),
         ),
         body: Center(
             child: Container(
@@ -234,7 +234,7 @@ class _EditorWidgetState extends State<EditorWidget> {
                     Card(
                       child: Padding(
                         padding: EdgeInsets.all(8),
-                        child: Text(list[i].text),
+                        child: Text(list[i].text ?? ""),
                       ),
                     )
                   ],
@@ -258,9 +258,9 @@ class _EditorWidgetState extends State<EditorWidget> {
                 height: 2,
                 color: Colors.blueAccent,
               ),
-              onChanged: (String newValue) {
+              onChanged: (String? newValue) {
                 setState(() {
-                  messageSide = newValue;
+                  messageSide = newValue ?? "";
                 });
               },
               items: <String>['start', 'end']
